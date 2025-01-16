@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calling Client With Clip Board</title>
+    <style>
+        /* Light blue button style */
+        #redirectButton {
+            background-color: #add8e6; /* Light blue color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #redirectButton:hover {
+            background-color: #87ceeb; /* Slightly darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Calling Client With Clip Board</h1>
+    <p>Click the button below to open the iOS app or go to the App Store:</p>
+    
+    <!-- Button to trigger the custom URL scheme and App Store fallback -->
+    <button id="redirectButton">Open iOS App</button>
+
+    <script>
+        // Add a click event listener to the button
+        document.getElementById('redirectButton').addEventListener('click', async function () {
+            // Define the deep link you want to copy to the clipboard
+            const deepLink = 'your-app-scheme://m5v2adasds';
+
+            // Try to copy the deep link to the clipboard
+            try {
+                await navigator.clipboard.writeText(deepLink);
+                console.log('Deep link copied to clipboard: ', deepLink);
+            } catch (err) {
+                console.error('Failed to write to clipboard: ', err);
+            }
+
+            // Redirect to the Universal Link
+            window.location.href = 'https://tel-qa-api.telescopehealth.com/app-facade/redirect-url/m5v2?domain=pp';
+        });
+    </script>
+</body>
+</html>
