@@ -1,0 +1,51 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "8W6NUL655S.com.baptisthealthplace.prod",
+        "components": [
+          {
+            "/": "/app-facade/redirect-url/*",
+            "?": {
+              "domain": "pp"
+            }
+          }
+        ]
+      },
+      {
+        "appID": "BPK2VKJAV4.com.beta.bhp",
+        "components": [
+          {
+            "/": "/app-facade/redirect-url/*",
+            "?": {
+              "domain": "pp4"
+            }
+          }
+        ]
+      },
+      {
+        "appID": "SFU337F3VW.com.emergencyphysiciansinc.telescopehealth",
+        "components": [
+          {
+            "/": "/app-facade/redirect-url/*",
+            "?": {
+              "domain": "pp2"
+            }
+          }
+        ]
+      },
+      {
+        "appID": "SFU337F3VW.com.telescope.callingclient",
+        "components": [
+          {
+            "/": "/app-facade/redirect-url/*",
+            "?": {
+              "domain": "pp3"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
