@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calling Client Link</title>
+    <style>
+        /* Light blue button style */
+        #redirectButton {
+            background-color: #add8e6; /* Light blue color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #redirectButton:hover {
+            background-color: #87ceeb; /* Slightly darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Calling Client Link</h1>
+    <p>Click the button below to open the iOS app or go to the App Store:</p>
+    
+    <!-- Button to trigger the custom URL scheme and App Store fallback -->
+    <button id="redirectButton">Open iOS App</button>
+
+    <script>
+        // Add a click event listener to the button
+        document.getElementById('redirectButton').addEventListener('click', function () {
+            // Set the cookie with the deep link
+            document.cookie = "deeplink=https://tel-qa-api.telescopehealth.com/app-facade/redirect-url/m5v2?domain=pp; path=/; max-age=3600";
+            // Redirect to the custom URL scheme
+            window.location.href = 'https://tel-qa-api.telescopehealth.com/app-facade/redirect-url/m5v2?domain=pp';
+        });
+    </script>
+</body>
+</html>
