@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Link with Fallback</title>
+    <style>
+        /* Light blue button style */
+        #redirectButton {
+            background-color: #add8e6; /* Light blue color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #redirectButton:hover {
+            background-color: #87ceeb; /* Slightly darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Link with Fallback</h1>
+    <p>Click the button below to open the iOS app or go to the App Store:</p>
+    
+    <!-- Button to trigger the custom URL scheme and App Store fallback -->
+    <button id="redirectButton">Open iOS App</button>
+
+    <script>
+        // Add a click event listener to the button
+        document.getElementById('redirectButton').addEventListener('click', function () {
+            // Redirect to the custom URL scheme
+            window.location.href = 'telescopeapp://app-facade/redirect-url/m5qfy0hn4?domain=pp';
+
+            // Set a fallback timer to open the App Store after a delay
+            setTimeout(function () {
+                window.location.href = 'https://apps.apple.com/app/id6670623240';
+            }, 1500); // 1.5 seconds delay to allow the custom URL scheme to take effect
+        });
+    </script>
+</body>
+</html>
