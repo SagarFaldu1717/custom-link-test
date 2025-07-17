@@ -26,17 +26,37 @@
     <!-- Button to trigger the custom URL scheme and App Store fallback -->
     <button id="redirectButton">Open iOS App</button>
 
-    <script>
-        // Add a click event listener to the button
+<script>
         document.getElementById('redirectButton').addEventListener('click', function () {
-            // Redirect to the custom URL scheme
-            //window.location.href = 'telescopeapp://app-facade/redirect-url/m5qfy0hn4?domain=pp';
-            window.location.href = 'https://tel-qa-api.telescopehealth.com/app-facade/redirect-url/m5v2?domain=tel-qa-pp';
+            // Define your app's custom URL and the App Store fallback URL
+            const appURL = 'https://tel-qa-api.telescopehealth.com/app-facade/redirect-url/m5v2?domain=tel-qa-pp';
+            const appStoreURL = 'https://apps.apple.com/app/id6670623240';
+            let fallbackTimeout;
 
-            // Set a fallback timer to open the App Store after a delay
-            setTimeout(function () {
-                window.location.href = 'https://apps.apple.com/app/id6670623240';
-            }, 1500); // 1.5 seconds delay to allow the custom URL scheme to take effect
+            // Function to handle the redirection to the App Store
+            const redirectToAppStore = function () {
+                // Only redirect if the page is still visible
+                if (document.visibilityState === 'visible') {
+                    window.location.href = appStoreURL;
+                }
+            };
+
+            // Set a timer to redirect to the App Store
+            fallbackTimeout = setTimeout(redirectToAppStore, 2000); // 2-second delay
+
+            // Add a one-time event listener for the visibilitychange event
+            document.addEventListener('visibilitychange', function onVisibilityChange() {
+                // If the page becomes hidden, the app likely opened.
+                // Clear the timeout to prevent redirection to the App Store.
+                if (document.visibilityState === 'hidden') {
+                    clearTimeout(fallbackTimeout);
+                    // Remove the event listener to avoid it firing again
+                    document.removeEventListener('visibilitychange', onVisibilityChange);
+                }
+            });
+
+            // Attempt to open the custom URL scheme
+            window.location.href = appURL;
         });
     </script>
 </body>
