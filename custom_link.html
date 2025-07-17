@@ -28,35 +28,23 @@
 
 <script>
         document.getElementById('redirectButton').addEventListener('click', function () {
-            // Define your app's custom URL and the App Store fallback URL
-            const appURL = 'https://tel-qa-api.telescopehealth.com/app-facade/redirect-url/m5v2?domain=tel-qa-pp';
-            const appStoreURL = 'https://apps.apple.com/app/id6670623240';
-            let fallbackTimeout;
+            var now = Date.now();
+            var appScheme = 'https://tel-qa-api.telescopehealth.com/app-facade/redirect-url/m5v2?domain=tel-qa-pp';
+            var appStoreURL = 'https://apps.apple.com/app/id6670623240';
 
-            // Function to handle the redirection to the App Store
-            const redirectToAppStore = function () {
-                // Only redirect if the page is still visible
+            // Create hidden iframe to trigger the app
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = appScheme;
+            document.body.appendChild(iframe);
+
+            // After 1.5s, check if page is still visible. If yes, app not installed, go to App Store
+            setTimeout(function () {
+                var elapsed = Date.now() - now;
                 if (document.visibilityState === 'visible') {
                     window.location.href = appStoreURL;
                 }
-            };
-
-            // Set a timer to redirect to the App Store
-            fallbackTimeout = setTimeout(redirectToAppStore, 2000); // 2-second delay
-
-            // Add a one-time event listener for the visibilitychange event
-            document.addEventListener('visibilitychange', function onVisibilityChange() {
-                // If the page becomes hidden, the app likely opened.
-                // Clear the timeout to prevent redirection to the App Store.
-                if (document.visibilityState === 'hidden') {
-                    clearTimeout(fallbackTimeout);
-                    // Remove the event listener to avoid it firing again
-                    document.removeEventListener('visibilitychange', onVisibilityChange);
-                }
-            });
-
-            // Attempt to open the custom URL scheme
-            window.location.href = appURL;
+            }, 1500);
         });
     </script>
 </body>
